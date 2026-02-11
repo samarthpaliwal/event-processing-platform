@@ -139,10 +139,6 @@ chmod +x scripts/load-test.sh
 - **Auto-scaling**: 2-20 workers based on queue depth
 - **Failure recovery**: <30s with exponential backoff
 
-## Resume Bullet
 
-> Architected and deployed distributed event-processing platform handling 1,000+ concurrent users and 500 req/sec using EC2, SQS, DynamoDB, and horizontal worker scaling; reduced failure recovery time by 40% via exponential backoff and idempotent job design; monitored 99th percentile latency via Prometheus/Grafana.
 
-## License
 
-MIT
