@@ -9,7 +9,7 @@ yum install -y python3.9 python3.9-pip git
 
 # Clone repository
 cd /home/ec2-user
-git clone https://github.com/YOUR_USERNAME/event-processing-platform.git || true
+git clone https://github.com/samarthpaliwal/event-processing-platform.git || true
 cd event-processing-platform/worker
 
 # Install dependencies
