@@ -1,43 +1,17 @@
-name: Deploy Event Processing Platform
+name: Deploy
 
+# Manual only. Builds the API and worker images, pushes them to ECR and applies
+# the Terraform in infrastructure/terraform. Needs the AWS_ACCESS_KEY_ID and
+# AWS_SECRET_ACCESS_KEY repository secrets. Tests run in ci.yml.
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 env:
   AWS_REGION: us-east-1
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-
-    - name: Install dependencies
-      run: |
-        pip install -r api/requirements.txt
-        pip install -r worker/requirements.txt
-        pip install pytest pytest-cov
-
-    - name: Run tests
-      run: |
-        pytest tests/ --cov --cov-report=xml
-
-    - name: Upload coverage
-      uses: codecov/codecov-action@v3
-
   build:
-    needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
     - uses: actions/checkout@v3
@@ -78,7 +52,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
     - uses: actions/checkout@v3
